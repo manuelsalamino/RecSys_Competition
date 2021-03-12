@@ -311,8 +311,11 @@ class Evaluator(object):
 
         # Compute recommendation quality for each user in batch
         for batch_user_index in range(len(recommended_items_batch_list)):
-
+            
+            
             test_user = test_user_batch_array[batch_user_index]
+
+            #print(f"Evaluating user: {test_user}")
 
             relevant_items = self.get_user_relevant_items(test_user)
 
@@ -326,7 +329,10 @@ class Evaluator(object):
 
             # Being the URM CSR, the indices are the non-zero column indexes
             recommended_items = recommended_items_batch_list[batch_user_index]
+            
             is_relevant = np.in1d(recommended_items, relevant_items, assume_unique=True)
+            
+            #print(f"Is Relevant: {is_relevant}")
 
             self._n_users_evaluated += 1
 
@@ -347,6 +353,8 @@ class Evaluator(object):
 
                 results_current_cutoff[EvaluatorMetrics.MRR.value].add_recommendations(is_relevant_current_cutoff)
                 results_current_cutoff[EvaluatorMetrics.MAP.value].add_recommendations(is_relevant_current_cutoff, relevant_items)
+                #print(results_current_cutoff[EvaluatorMetrics.MAP.value])
+                #print("----------------------------------------------------------------------------------------------------")
                 results_current_cutoff[EvaluatorMetrics.NOVELTY.value].add_recommendations(recommended_items_current_cutoff)
                 results_current_cutoff[EvaluatorMetrics.AVERAGE_POPULARITY.value].add_recommendations(recommended_items_current_cutoff)
                 results_current_cutoff[EvaluatorMetrics.DIVERSITY_GINI.value].add_recommendations(recommended_items_current_cutoff)
