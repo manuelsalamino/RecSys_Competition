@@ -1,5 +1,5 @@
-from DataReader import DataReader
-from DataSplitter import DataSplitter
+from Utils.DataReader import DataReader
+from Utils.DataSplitter import DataSplitter
 from Base.Evaluation.Evaluator import EvaluatorHoldout
 from Base.HybridRecommender import Hybrid
 
