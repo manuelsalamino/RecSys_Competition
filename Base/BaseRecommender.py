@@ -80,12 +80,15 @@ class BaseRecommender(object):
 
 
     def _remove_TopPop_on_scores(self, scores_batch):
+        print("ATTENZIONE!!!")
         scores_batch[:, self.filterTopPop_ItemsID] = -np.inf
+        #scores_batch[:, self.filterTopPop_ItemsID] = 1000
         return scores_batch
 
 
     def _remove_custom_items_on_scores(self, scores_batch):
         scores_batch[:, self.items_to_ignore_ID] = -np.inf
+        print("Here!!!")
         return scores_batch
 
 
@@ -129,7 +132,7 @@ class BaseRecommender(object):
 
 
         for user_index in range(len(user_id_array)):
-
+            
             user_id = user_id_array[user_index]
 
             if remove_seen_flag:
@@ -147,6 +150,7 @@ class BaseRecommender(object):
 
 
         if remove_top_pop_flag:
+            #print("ATTENZIONE!!!")
             scores_batch = self._remove_TopPop_on_scores(scores_batch)
 
         if remove_custom_items_flag:
