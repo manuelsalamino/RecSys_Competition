@@ -42,8 +42,8 @@ In particular this wrapper give the possibility to do more tests (choose the val
  
 ## This repository contains the following runnable scripts
 
- - evaluation_and_submission.py.py: Script running the best model described before. You can choose to run only the evaluation (return some metrics of the model, like MAP) or only the submission procedure (return the csv file we had to submit to kaggle) or both of them.
- - parameter_tuning.py: Script performing parameter tuning for the chosen algorithm. By default the algorithm is ALS, but by modifying the code you can evaluate also the others algorithm.
+ - *evaluation_and_submission.py*: Script running the best model described before. You can choose to run only the evaluation (return some metrics of the model, like MAP) or only the submission procedure (return the csv file we had to submit to kaggle) or both of them.
+ - *parameter_tuning.py*: Script performing parameter tuning for the chosen algorithm. By default the algorithm is ALS, but by modifying the code you can evaluate also the others algorithm.
  
 
 ## Requirements
