@@ -39,10 +39,10 @@ ICM = reader.load_icm()
 
 def objective(latent_factors, regularization, alpha):    # parameters must be the same defined above
     average_map = 0.0
-    n_folds = 3             # number of tests (on different data split)
+    n_tests = 3             # number of tests (on different data split)
     seed = [1234, 12, 34]               # seed to define the split
     
-    for i in range(n_folds):
+    for i in range(n_tests):
         URM_train, URM_test = splitter.split_train_test(urm, testing=0.15, seed=seed[i])
         URM_test = n_interaction_interval(URM_test, 0, 5)     # maintain only users with a number of interaction between 0 and 5 (excluded)
         
@@ -58,7 +58,7 @@ def objective(latent_factors, regularization, alpha):    # parameters must be th
         average_map += cumulative_MAP
     
     print(f"\nlatent_factors: {latent_factors}, regularization: {regularization}\navg MAP: {average_map/n_folds}\n\n")
-    return -average_map/n_folds                # return the avg_map among the different test (to avoid overfitting on a specific data split)
+    return -average_map/n_tests                # return the avg_map among the different test (to avoid overfitting on a specific data split)
 
 # DEFINE parameter to tune
 space = [Integer(low=100, high=1000, name='latent_factors'),
