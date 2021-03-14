@@ -1,19 +1,23 @@
-# RecSys Course @ Politecnico di Milano
-This is the official repository for the 2019 Recommender Systems course at Polimi.
+# RecSys Competition @ Politecnico di Milano
+The Recommender System Course at Politecnico di Milano is divided into two parts: the most important one consists in a Internal Kaggle Competition amongs students.
+
+# The Competition
+The application domain is book recommendation. The datasets contains both interactions between users and books, and tokens extracted from the book text. The main goal of the competition is to discover which item a user will interact with.
+
 
 Developed by <a href="https://mauriziofd.github.io/" target="_blank">Maurizio Ferrari Dacrema</a>, Postdoc researcher at Politecnico di Milano. See our [website](http://recsys.deib.polimi.it/) for more information on our research group and available thesis.
 The introductory slides are available [here](slides/Introduction%20and%20Materials%20for%20RecSys%20Practice%20Sessions.pdf). 
 For Installation instructions see the following section [Installation](#Installation).
 
 
-#### This repository contains a Cython implementation of:
- - SLIM BPR: Item-item similarity matrix machine learning algorithm optimizing BPR.
-    Uses a Cython tree-based sparse matrix, suitable for datasets whose number of items is too big for the
-    dense similarity matrix to fit in memory. 
-    Dense similarity is also supported.
- - MF BPR: Matrix factorization optimizing BPR
- - FunkSVD: Matrix factorization optimizing RMSE
- - AsymmetricSVD
+# What you can find in this repo
+ Only what is necessary to build and test the model we used to reach our best result in the competition (**13th place**).
+ For the implementation of other recommender system algorithms look at the original repository in the [References](#References)
+ 
+# The Best Model:
+ Desciption of our final (best) model.
+ ![ciaaaa](https://imgur.com/a/pC3Tk0v)
+
 
 #### This repo contains a Python implementation of:
  - Item-based KNN collaborative
