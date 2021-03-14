@@ -1,183 +1,58 @@
-# RecSys Competition @ Politecnico di Milano
+# Recommender Systems Competition @ Politecnico di Milano
+
+<p align="center">
+    <img src="https://i.imgur.com/mPb3Qbd.gif" width="180" alt="Politecnico di Milano"/>
+</p>
+
 The Recommender System Course at Politecnico di Milano is divided into two parts: the most important one consists in a Internal Kaggle Competition amongs students.
 
-# The Competition
+This repository is forked by the [official one](https://github.com/MaurizioFD/RecSys_Course_AT_PoliMi) of Polimi, developed by [Maurizio Ferrari Dacrema](https://mauriziofd.github.io/), Postdoc researcher at Politecnico di Milano. See the [website](http://recsys.deib.polimi.it/) for more information on its research group.
+
+
+### The Competition
 The application domain is book recommendation. The datasets contains both interactions between users and books, and tokens extracted from the book text. The main goal of the competition is to discover which item a user will interact with.
 
 
-Developed by <a href="https://mauriziofd.github.io/" target="_blank">Maurizio Ferrari Dacrema</a>, Postdoc researcher at Politecnico di Milano. See our [website](http://recsys.deib.polimi.it/) for more information on our research group and available thesis.
-The introductory slides are available [here](slides/Introduction%20and%20Materials%20for%20RecSys%20Practice%20Sessions.pdf). 
-For Installation instructions see the following section [Installation](#Installation).
 
-
-# What you can find in this repo
+### What you can find in this repo
  Only what is necessary to build and test the model we used to reach our best result in the competition (**13th place**).
+ In particular the recommender systems algorithm that you can find are:
+ * Item based CF
+ * Graph Based RP3Beta
+ * ALS (the ALS Class wrap a the als class of python [implict library](https://implicit.readthedocs.io/en/latest/als.html))
+ 
  For the implementation of other recommender system algorithms look at the original repository in the [References](#References)
  
-# The Best Model:
+## The Best Model:
  Desciption of our final (best) model.
- ![ciaaaa](https://imgur.com/a/pC3Tk0v)
-
-
-#### This repo contains a Python implementation of:
- - Item-based KNN collaborative
- - Item-based KNN content
- - User-based KNN
- - PureSVD: Matrix factorization applied using the simple SVD decomposition of the URM
- - WRMF or IALS: Matrix factorization developed for implicit interactions (Papers: <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.306.4684&rep=rep1&type=pdf" target="_blank">WRMF</a>, <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.167.5120&rep=rep1&type=pdf" target="_blank">IALS</a>)
- - P3alpha, RP3beta: graph based algorithms modelling a random walk and representing the item-item similarity as a transition probability (Papers: <a href="https://dl.acm.org/doi/abs/10.1145/2567948.2579244" target="_blank">P3alpha</a>, <a href="https://dl.acm.org/doi/10.1145/2955101" target="_blank">RP3beta</a>)
- - SLIM ElasticNet Item-item similarity matrix machine learning algorithm optimizing prediction error (MSE)
  
+ <p align="center">
+    <img src="https://imgur.com/a/pC3Tk0v" width="1000" alt="model schema"/>
+</p>
+
+Divided in 4 layers. Each layer represent a user of users based on the number of interactions they have:
+ - \[0,5) represents users with number of interaction lower than 5
+ - \[5, 10) number of interactions from 5 to 10
+ - \[10, 50) number of interactions from 10 to 50
+ - \[50, ...) number of interactions higher or equal to 50
  
-#### Bayesian parameter tuning:
+## Parameter tuning:
 A simple wrapper of scikit-optimize allowing for a simple and fast parameter tuning.
-The BayesianSkoptSearch object will save the following files:
-- AlgorithmName_BayesianSkoptSearch.txt file with all the cases explored and the recommendation quality
-- _best_model file which contains the trained model and can be loaded with recommender.load_model(path_to_best_model_file)
-- _metadata file which contains a dictionary with all the explored cases, for each the fit parameters, the validation results and, if that configuration was the new best one, the test results. It also contains, for all configurations, the train, validation and test time, in seconds.
+In particular this wrapper give the possibility to do more tests (choose the value of n_tests) on different data split, in order to find the best parameters in a more reliably way. Avoid the overfitting obtained by optimizing on a specific test split.
  
-#### This repository contains the following runnable scripts
+## This repository contains the following runnable scripts
 
- - run_all_algorithms.py: Script running sequentially all available algorithms and saving the results in result_all_algorithms.txt
- - run_parameter_search.py: Script performing parameter tuning for all available algorithms. Inside all parameters are listed with some common values.
+ - evaluation_and_submission.py.py: Script running the best model described before. You can choose to run only the evaluation (return some metrics of the model, like MAP) or only the submission procedure (return the csv file we had to submit to kaggle) or both of them.
+ - parameter_tuning.py: Script performing parameter tuning for the chosen algorithm. By default the algorithm is ALS, but by modifying the code you can evaluate also the others algorithm.
  
-
-#### This repository also provides an implementation of:
- 
- - Similarities: Cosine Similarity, Adjusted Cosine, Pearson Correlation, Jaccard Correlation, Tanimoto Coefficient, Dice coefficinent, Tversky coefficient, Asymmetric Cosine and Euclidean similarity: Implemented both in Python and Cython with the same interface. Base.compute_similarity chooses which to use depending on the density of the data and on whether a compiled cython version is available on your architecture and operative system. 
- - Metrics: MAP, recall (the denominator is the number of user's test items), precision_recall_min_den (the denominator is the min between the number of user's test items and the recommendation list length), precision, ROC-AUC, MRR, RR, NDCG, Hit Rate, ARHR, Novelty, Coverage, Shannon entropy, Gini Diversity, Herfindahl Diversity, Mean inter list Diversity, Feature based diversity
- - Dataset: Movielens10MReader, downloads and reads the Movielens 10M rating file, splits it into three URMs for train, test and validation and saves them for later use. 
- 
-
-Cython code is already compiled for Linux and Windows x86 (your usual personal computer architecture) and ppc64 (IBM Power PC). To recompile the code just run the cython compilaton script as described in the installation section.
-The code has beend developed for Linux and Windows.
-
-
-
 
 ## Installation
-
-Note that this repository requires Python 3.6
-
-First we suggest you create an environment for this project using virtualenv (or another tool like conda)
-
-First checkout this repository, then enter in the repository folder and run this commands to create and activate a new environment:
-
-If you are using virtualenv:
-```console
-virtualenv -p python3 RecSysFramework
-source RecSysFramework/bin/activate
-```
-If you are using conda:
-```console
-conda create -n RecSysFramework python=3.6 anaconda
-conda activate RecSysFramework
-```
 
 Then install all the requirements and dependencies using the following command.
 ```console
 pip install -r requirements.txt
 ```
 
-At this point you have to compile all Cython algorithms.
-In order to compile you must first have installed: _gcc_ and _python3 dev_. Under Linux those can be installed with the following commands:
-```console
-sudo apt install gcc 
-sudo apt-get install python3-dev
-```
-If you are using Windows as operating system, the installation procedure is a bit more complex. You may refer to [THIS](https://github.com/cython/cython/wiki/InstallingOnWindows) guide.
+## References
+This repository is forked by the [official one](https://github.com/MaurizioFD/RecSys_Course_AT_PoliMi), developed by [Maurizio Ferrari Dacrema](https://mauriziofd.github.io/), Postdoc researcher at Politecnico di Milano. See the [website](http://recsys.deib.polimi.it/) for more information on its research group.
 
-Now you can compile all Cython algorithms by running the following command. The script will compile within the current active environment. The code has been developed for Linux and Windows platforms. During the compilation you may see some warnings. 
- 
-```console
-python run_compile_all_cython.py
-```
-
-
-
-## Project structure
-
-### Base
-Contains some basic modules and the base classes for different Recommender types.
-
-#### Base.Evaluation
-The Evaluator class is used to evaluate a recommender object. It computes various metrics:
-* Accuracy metrics: ROC_AUC, PRECISION, RECALL, MAP, MRR, NDCG, F1, HIT_RATE, ARHR
-* Beyond-accuracy metrics: NOVELTY, DIVERSITY, COVERAGE
-
-The evaluator takes as input the URM against which you want to test the recommender, then a list of cutoff values (e.g., 5, 20) and, if necessary, an object to compute diversity.
-The function evaluateRecommender will take as input only the recommender object you want to evaluate and return both a dictionary in the form {cutoff: results}, where results is {metric: value} and a well-formatted printable string.
-
-```python
-
-    from Base.Evaluation.Evaluator import EvaluatorHoldout
-
-    evaluator_test = EvaluatorHoldout(URM_test, [5, 20])
-
-    results_run_dict, results_run_string = evaluator_test.evaluateRecommender(recommender_instance)
-
-    print(results_run_string)
-
-```
-
-
-#### Base.Similarity
-The similarity module allows to compute the item-item or user-user similarity.
-It is used by calling the Compute_Similarity class and passing which is the desired similarity and the sparse matrix you wish to use.
-
-It is able to compute the following similarities: Cosine, Adjusted Cosine, Jaccard, Tanimoto, Pearson and Euclidean (linear and exponential)
-
-```python
-
-    similarity = Compute_Similarity(URM_train, shrink=shrink, topK=topK, normalize=normalize, similarity = "cosine")
-
-    W_sparse = similarity.compute_similarity()
-
-```
-
-
-### Recommenders
-All recommenders inherit from BaseRecommender, therefore have the same interface.
-You must provide the data when instantiating the recommender and then call the _fit_ function to build the corresponding model.
-
-Each recommender has a _compute_item_score function which, given an array of user_id, computes the prediction or _score_ for all items.
-Further operations like removing seen items and computing the recommendation list of the desired length are done by the _recommend_ function of BaseRecommender
-
-As an example:
-
-```python
-    user_id = 158
-    
-    recommender_instance = ItemKNNCFRecommender(URM_train)
-    recommender_instance.fit(topK=150)
-    recommended_items = recommender_instance.recommend(user_id, cutoff = 20, remove_seen_flag=True)
-    
-    recommender_instance = SLIM_ElasticNet(URM_train)
-    recommender_instance.fit(topK=150, l1_ratio=0.1, alpha = 1.0)
-    recommended_items = recommender_instance.recommend(user_id, cutoff = 20, remove_seen_flag=True)
-    
-```
-
-### Data Reader and splitter
-DataReader objects read the dataset from its original file and save it as a sparse matrix.
-
-DataSplitter objects take as input a DataReader and split the corresponding dataset in the chosen way.
-At each step the data is automatically saved in a folder, though it is possible to prevent this by setting _save_folder_path = False_ when calling _load_data_.
-If a DataReader or DataSplitter is called for a dataset which was already processed, the saved data is loaded.
-
-DataPostprocessing can also be applied between the dataReader and the dataSplitter and nested in one another.
-
-When you have bilt the desired combination of dataset/preprocessing/split, get the data calling _load_data_.
-
-```python
-dataset = Movielens1MReader()
-
-dataset = DataPostprocessing_K_Cores(dataset, k_cores_value=25)
-dataset = DataPostprocessing_User_sample(dataset, user_quota=0.3)
-dataset = DataPostprocessing_Implicit_URM(dataset)
-
-dataSplitter = DataSplitter_leave_k_out(dataset)
-
-dataSplitter.load_data()
-
-URM_train, URM_validation, URM_test = dataSplitter.get_holdout_split()
