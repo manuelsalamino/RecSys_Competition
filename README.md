@@ -19,7 +19,7 @@ The application domain is book recommendation. The datasets contains both intera
  In particular the recommender systems algorithm that you can find are:
  * Item based CF
  * Graph Based RP3Beta
- * ALS (the ALS Class wrap a the als class of python [implict library](https://implicit.readthedocs.io/en/latest/als.html))
+ * ALS (the ALS Class wrap the als class of python [implict library](https://implicit.readthedocs.io/en/latest/als.html))
  
  For the implementation of other recommender system algorithms look at the original repository in the [References](#References)
  
@@ -27,10 +27,10 @@ The application domain is book recommendation. The datasets contains both intera
  Desciption of our final (best) model.
  
  <p align="center">
-    <img src="https://imgur.com/a/pC3Tk0v" width="1000" alt="model schema"/>
+    <img src="https://i.imgur.com/p4SBP8b.png" width="600" alt="model schema"/>
 </p>
 
-Divided in 4 layers. Each layer represent a user of users based on the number of interactions they have:
+Divided in 4 layers. Each layer represent a set of users based on the number of interactions they have:
  - \[0,5) represents users with number of interaction lower than 5
  - \[5, 10) number of interactions from 5 to 10
  - \[10, 50) number of interactions from 10 to 50
@@ -53,6 +53,17 @@ Then install all the requirements and dependencies using the following command.
 pip install -r requirements.txt
 ```
 
-## References
-This repository is forked by the [official one](https://github.com/MaurizioFD/RecSys_Course_AT_PoliMi), developed by [Maurizio Ferrari Dacrema](https://mauriziofd.github.io/), Postdoc researcher at Politecnico di Milano. See the [website](http://recsys.deib.polimi.it/) for more information on its research group.
+## Results
+The competition has two deadlines: the first one after one month, the second (and final) one after two months.
 
+We obtained the following results in the two deadline:
+* First Deadline:
+    * *public leaderboard*: **8th** position, score: 0.0952615
+    * *private leaderboard*: **8th** position, score: 0.102143
+* Final Deadline:
+    * *public leaderboard*: **13th** position, score: 0.0963792
+    * *private leaderboard*: **13th** position, score: 0.104061
+
+## Team
+* Manuel Salamino [github](https://github.com/manuelsalamino)
+* Tommaso Fioravanti [github](https://github.com/tommasofioravanti)
