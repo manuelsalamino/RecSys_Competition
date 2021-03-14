@@ -64,6 +64,6 @@ We obtained the following results in the two deadline:
     * *public leaderboard*: **13th** position, score: 0.0963792
     * *private leaderboard*: **13th** position, score: 0.104061
 
-## Team
-* Manuel Salamino ([github](https://github.com/manuelsalamino))
-* Tommaso Fioravanti ([github](https://github.com/tommasofioravanti))
+## Team Members
+* [Manuel Salamino](https://github.com/manuelsalamino)
+* [Tommaso Fioravanti](https://github.com/tommasofioravanti)
