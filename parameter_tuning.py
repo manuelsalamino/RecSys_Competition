@@ -57,7 +57,7 @@ def objective(latent_factors, regularization, alpha):    # parameters must be th
         
         average_map += cumulative_MAP
     
-    print(f"\nlatent_factors: {latent_factors}, regularization: {regularization}\navg MAP: {average_map/n_folds}\n\n")
+    print(f"\nlatent_factors: {latent_factors}, regularization: {regularization}\navg MAP: {average_map/n_tests}\n\n")
     return -average_map/n_tests                # return the avg_map among the different test (to avoid overfitting on a specific data split)
 
 # DEFINE parameter to tune
