@@ -4,6 +4,8 @@
     <img src="https://i.imgur.com/mPb3Qbd.gif" width="180" alt="Politecnico di Milano"/>
 </p>
 
+[![open-Kaggle](https://img.shields.io/badge/open-Kaggle-4791CD.svg)](https://www.kaggle.com/c/recommender-system-2020-challenge-polimi)
+
 The Recommender System Course at Politecnico di Milano is divided into two parts: the most important one consists in a Internal [Kaggle Competition](https://www.kaggle.com/c/recommender-system-2020-challenge-polimi) amongs students.
 
 This repository is forked by the [official one](https://github.com/MaurizioFD/RecSys_Course_AT_PoliMi) of Polimi, developed by [Maurizio Ferrari Dacrema](https://mauriziofd.github.io/), Postdoc researcher at Politecnico di Milano. See the [website](http://recsys.deib.polimi.it/) for more information on its research group.
